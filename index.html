@@ -65,6 +65,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-来一波本地项目上传到github" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" class="article-date">
+  <time datetime="2018-02-01T08:19:57.000Z" itemprop="datePublished">2018-02-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/wangzai.github.io/2018/02/01/来一波本地项目上传到github/">来一波本地项目上传到github</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.找到要上传的项目文件夹，并打开命令行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">按住shift键，右击鼠标，在此处打开powershell，或者在此处打开命令行</span><br></pre></td></tr></table></figure>
+<p>2.git初始化文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p>3.将代码上传到缓存区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .    //将所有代码上传到缓存区</span><br></pre></td></tr></table></figure>
+<p>4.将代码推送到本地库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;注释语&quot;   //-m  表示子提交缓存区的</span><br><span class="line">git commit -am &quot;注释语&quot;   //-am   相当于 git add 和 git commit -m 的组合</span><br></pre></td></tr></table></figure>
+<p>5.在github上新建项目，创建好后把地址拷贝</p>
+<p>6.将本地仓库关联到github上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/wangzai999/aa.github.io</span><br></pre></td></tr></table></figure>
+<p>7.将代码进行合并（这步是为了防止下一步上传代码报错）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase origin master</span><br></pre></td></tr></table></figure>
+<p>8.上传代码到github（如果是第一次上传代码，会弹出输入账号密码的窗口）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>已经上传好了，当修改文件时，只需要 : 上传缓存区-&gt;上传本地库-&gt;上传到GitHub</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" data-id="cjd49g02n0000lkwcihrztrkd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hexo-git在github上搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" class="article-date">
@@ -122,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" data-id="cjd021kns0001pgwc21s0tl2t" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" data-id="cjd49g02v0002lkwcyibmogc6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -167,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hello-world/" data-id="cjd021knm0000pgwcx81deeu8" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hello-world/" data-id="cjd49g02t0001lkwcjz12t83g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -195,7 +247,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/01/">一月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/01/">一月 2018</a></li></ul>
     </div>
   </div>
 
@@ -206,6 +258,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/02/01/来一波本地项目上传到github/">来一波本地项目上传到github</a>
+          </li>
         
           <li>
             <a href="/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/">hexo+git在github上搭建个人博客</a>
