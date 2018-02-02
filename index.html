@@ -65,6 +65,218 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-记用pychon写一个爬图片的网页爬虫" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/" class="article-date">
+  <time datetime="2018-02-02T09:34:59.000Z" itemprop="datePublished">2018-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/">记用pychon写一个爬图片的网页爬虫</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>还不多说，直接上源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># 引入两个模块</span><br><span class="line">from urllib.request import urlopen</span><br><span class="line">import re</span><br><span class="line">import os</span><br><span class="line">import shutil</span><br><span class="line"></span><br><span class="line">def getHtml(url):				#获取网页内容函数</span><br><span class="line">    page = urlopen(url)</span><br><span class="line">    html = page.read()</span><br><span class="line">    return html</span><br><span class="line">def getImg(html):				#传入网页的数据，筛选出我要的数据		</span><br><span class="line">    reg = &apos;src=&quot;(.+?\.jpg)&apos;		#正则表达式</span><br><span class="line">    image = re.compile(reg);</span><br><span class="line">    imglist = re.findall(image, html)</span><br><span class="line">    return(imglist)</span><br><span class="line">def writeFile(text):		#把数据写入到文件中函数</span><br><span class="line">    print(os.getcwd())     #返回当前脚本的位置</span><br><span class="line">    print(os.listdir(os.getcwd()))     #返回指定目录下的所有文件</span><br><span class="line">    fp = open(&quot;text.json&quot;,&apos;w&apos;)</span><br><span class="line">    text1 =&apos;&#123;&quot;data&quot;:[&quot;&apos;+ &apos;&quot;,&quot;&apos;.join(text)+&apos;&quot;]&#125;&apos;</span><br><span class="line">    fp.write(text1)</span><br><span class="line">    fp.close()</span><br><span class="line"></span><br><span class="line">html = getHtml(&apos;http://cz.mycar168.com/showspe/special_hailing/20180310hlgcz?baidujj-mingju&amp;1=shenzhen-hailingchezhanpc&amp;1=achezhanchezhan&amp;1=%E8%BF%91%E6%9C%9F%E8%BD%A6%E5%B1%95&amp;e_adposition=cl1&amp;e_keywordid=53084209076#B_vid=9684476042573239518&apos;)</span><br><span class="line">html = html.decode();       #将字节数据转换成string数据</span><br><span class="line">writeFile(getImg(html))</span><br></pre></td></tr></table></figure>
+<p>text.json获取到的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;data&quot;:[&quot;/images/award_1.jpg&quot;,&quot;/images/award_2.jpg&quot;,&quot;/images/award_3.jpg&quot;,&quot;http://img.mycar168.com/ueditor/upload/image/20180131/151738606434327750.jpg&quot;,&quot;http://img.mycar168.com/ueditor/upload/image/20180131/151738607359632797.jpg&quot;,&quot;http://img.mycar168.com/ueditor/upload/image/20180131/151738607969969444.jpg&quot;,&quot;/images/change/sz_gifts.jpg&quot;,&quot;/images/change/sz_hl.jpg&quot;,&quot;/images/change/qdyl.jpg&quot;,&quot;/images/change/zdcj.jpg&quot;,&quot;/images/change/gcyl.jpg&quot;,&quot;/images/change/hlq.jpg&quot;,&quot;/images/change/sz_gifts.jpg&quot;,&quot;http://img.mycar168.com/ueditor/upload/image/20170307/148885451958053172.jpg&quot;,&quot;http://img.mycar168.com/ueditor/upload/image/20170307/148885454658814605.jpg&quot;,&quot;http://img.mycar168.com/ueditor/upload/image/20170307/148885456187073170.jpg&quot;,&quot;http://img.mycar168.com/ueditor/upload/image/20170307/148885457885319765.jpg&quot;,&quot;/images/change/qrcode_chezhan.jpg&quot;]&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="踩的坑"><a href="#踩的坑" class="headerlink" title="踩的坑"></a>踩的坑</h3><p><strong>1.urllib模块</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在pychon3中，urllib是一个包，集成了用于处理url的模块。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一开始学pychon的时候看的是菜鸟教程里面的，而我用的是版本pychon3，里面的教程还是前面版本的，导致我直接引入urllib模块，使用urlopen方法的时候报错</span><br><span class="line">urllib在pychon2与pychon3的区别：</span><br><span class="line">转载自：http://blog.csdn.net/whatday/article/details/54710403</span><br><span class="line">见下表：</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>Python 2 name</th>
+<th>Python 3 name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>urllib.urlretrieve()</td>
+<td>urllib.request.urlretrieve()</td>
+</tr>
+<tr>
+<td>urllib.urlcleanup()</td>
+<td>urllib.request.urlcleanup()</td>
+</tr>
+<tr>
+<td>urllib.quote()</td>
+<td>urllib.parse.quote()</td>
+</tr>
+<tr>
+<td>urllib.quote_plus()</td>
+<td>urllib.parse.quote_plus()</td>
+</tr>
+<tr>
+<td>urllib.unquote()</td>
+<td>urllib.parse.unquote()</td>
+</tr>
+<tr>
+<td>urllib.unquote_plus()</td>
+<td>urllib.parse.unquote_plus()</td>
+</tr>
+<tr>
+<td>urllib.urlencode()</td>
+<td>urllib.parse.urlencode()</td>
+</tr>
+<tr>
+<td>urllib.pathname2url()</td>
+<td>urllib.request.pathname2url()</td>
+</tr>
+<tr>
+<td>urllib.url2pathname()</td>
+<td>urllib.request.url2pathname()</td>
+</tr>
+<tr>
+<td>urllib.getproxies()</td>
+<td>urllib.request.getproxies()</td>
+</tr>
+<tr>
+<td>urllib.URLopener</td>
+<td>urllib.request.URLopener</td>
+</tr>
+<tr>
+<td>urllib.FancyURLopener</td>
+<td>urllib.request.FancyURLopener</td>
+</tr>
+<tr>
+<td>urllib.ContentTooShortError</td>
+<td>urllib.error.ContentTooShortError</td>
+</tr>
+<tr>
+<td>urllib2.urlopen()</td>
+<td>urllib.request.urlopen()</td>
+</tr>
+<tr>
+<td>urllib2.install_opener()</td>
+<td>urllib.request.install_opener()</td>
+</tr>
+<tr>
+<td>urllib2.build_opener()</td>
+<td>urllib.request.build_opener()</td>
+</tr>
+<tr>
+<td>urllib2.URLError</td>
+<td>urllib.error.URLError</td>
+</tr>
+<tr>
+<td>urllib2.HTTPError</td>
+<td>urllib.error.HTTPError</td>
+</tr>
+<tr>
+<td>urllib2.Request</td>
+<td>urllib.request.Request</td>
+</tr>
+<tr>
+<td>urllib2.OpenerDirector</td>
+<td>urllib.request.OpenerDirector</td>
+</tr>
+<tr>
+<td>urllib2.BaseHandler</td>
+<td>urllib.request.BaseHandler</td>
+</tr>
+<tr>
+<td>urllib2.HTTPDefaultErrorHandler</td>
+<td>urllib.request.HTTPDefaultErrorHandler</td>
+</tr>
+<tr>
+<td>urllib2.HTTPRedirectHandler</td>
+<td>urllib.request.HTTPRedirectHandler</td>
+</tr>
+<tr>
+<td>urllib2.HTTPCookieProcessor</td>
+<td>urllib.request.HTTPCookieProcessor</td>
+</tr>
+<tr>
+<td>urllib2.ProxyHandler</td>
+<td>urllib.request.ProxyHandler</td>
+</tr>
+<tr>
+<td>urllib2.HTTPPasswordMgr</td>
+<td>urllib.request.HTTPPasswordMgr</td>
+</tr>
+<tr>
+<td>urllib2.HTTPPasswordMgrWithDefaultRealm</td>
+<td>urllib.request.HTTPPasswordMgrWithDefaultRealm</td>
+</tr>
+<tr>
+<td>urllib2.AbstractBasicAuthHandler</td>
+<td>urllib.request.AbstractBasicAuthHandler</td>
+</tr>
+<tr>
+<td>urllib2.HTTPBasicAuthHandler</td>
+<td>urllib.request.HTTPBasicAuthHandler</td>
+</tr>
+<tr>
+<td>urllib2.ProxyBasicAuthHandler</td>
+<td>urllib.request.ProxyBasicAuthHandler</td>
+</tr>
+<tr>
+<td>urllib2.AbstractDigestAuthHandler</td>
+<td>urllib.request.AbstractDigestAuthHandler</td>
+</tr>
+<tr>
+<td>urllib2.HTTPDigestAuthHandler</td>
+<td>urllib.request.HTTPDigestAuthHandler</td>
+</tr>
+<tr>
+<td>urllib2.ProxyDigestAuthHandler</td>
+<td>urllib.request.ProxyDigestAuthHandler</td>
+</tr>
+<tr>
+<td>urllib2.HTTPHandler</td>
+<td>urllib.request.HTTPHandler</td>
+</tr>
+<tr>
+<td>urllib2.HTTPSHandler</td>
+<td>urllib.request.HTTPSHandler</td>
+</tr>
+<tr>
+<td>urllib2.FileHandler</td>
+<td>urllib.request.FileHandler</td>
+</tr>
+<tr>
+<td>urllib2.FTPHandler</td>
+<td>urllib.request.FTPHandler</td>
+</tr>
+<tr>
+<td>urllib2.CacheFTPHandler</td>
+<td>urllib.request.CacheFTPHandler</td>
+</tr>
+<tr>
+<td>urllib2.UnknownHandler</td>
+<td>urllib.request.UnknownHandler</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 引入urllib.request模块的urlopen(打开url的方法)</span><br><span class="line">from urllib.request import urlopen</span><br><span class="line"></span><br><span class="line">def getHtml(url):</span><br><span class="line">    page = urlopen(url)</span><br><span class="line">    html = page.read()</span><br><span class="line">    print(html)</span><br><span class="line">    return html</span><br></pre></td></tr></table></figure>
+<p><strong>2.是用re模块</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">在Python3以后，字符串和bytes类型彻底分开了。字符串是以字符为单位进行处理的，bytes类型是以字节为单位处理的。Python3中，bytes通常用于网络数据传输、二进制图片和文件的保存等等。可以通过调用bytes()生成bytes实例</span><br><span class="line"></span><br><span class="line">文件的read方法读取到的数据是bytes类型</span><br><span class="line"></span><br><span class="line">而re模块的findall方法只能处理string数据</span><br><span class="line"></span><br><span class="line">解决方法：</span><br><span class="line">type(b)   为bytes类型</span><br><span class="line">string = b.decode() 直接以默认的utf-8编码解码bytes成string</span><br><span class="line">b = string.encode() 直接以默认的utf-8编码string为bytes</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 引入两个模块</span><br><span class="line">from urllib.request import urlopen</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line">def getHtml(url):</span><br><span class="line">    page = urlopen(url)</span><br><span class="line">    html = page.read()</span><br><span class="line">    print(html)</span><br><span class="line">    return html</span><br><span class="line">def getImg(html):</span><br><span class="line">    reg = &apos;src=(.+?\.jpg)&apos; \</span><br><span class="line">          &apos; alt=&apos;</span><br><span class="line">    image = re.compile(reg);</span><br><span class="line">    print(image)</span><br><span class="line">    imglist = re.findall(image, html)</span><br><span class="line">    print(imglist)</span><br><span class="line">html = getHtml(&apos;http://sc.chinaz.com/tupian/fengjingtupian.html&apos;)</span><br><span class="line">html = html.decode(); #以默认的utf-8编码解码bytes成string</span><br><span class="line">print(type(html));</span><br><span class="line">getImg(html)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/" data-id="cjd5qqo6m0000d8wcl4hu2w54" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-来一波本地项目上传到github" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" class="article-date">
@@ -107,7 +319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" data-id="cjd49g02n0000lkwcihrztrkd" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" data-id="cjd5qqo7a0003d8wct170pqgj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -174,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" data-id="cjd49g02v0002lkwcyibmogc6" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" data-id="cjd5qqo6t0001d8wcusexg8ht" class="article-share-link">Share</a>
       
       
     </footer>
@@ -219,7 +431,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hello-world/" data-id="cjd49g02t0001lkwcjz12t83g" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hello-world/" data-id="cjd5qqo6v0002d8wctgxq055a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -258,6 +470,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/">记用pychon写一个爬图片的网页爬虫</a>
+          </li>
         
           <li>
             <a href="/wangzai.github.io/2018/02/01/来一波本地项目上传到github/">来一波本地项目上传到github</a>
