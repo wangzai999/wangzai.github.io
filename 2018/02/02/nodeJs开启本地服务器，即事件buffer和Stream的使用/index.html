@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>nodeJs开启本地服务器，即事件buffer和Stream的使用 | 旺平的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="用nodeJs开启本地服务器nodeJs安装什么的就没什么好说了 1.找个文件夹，新建一个文件server.js 12345678910111213141516/*创建服务器*///引入http模块var http = require(&amp;apos;http&amp;apos;);//创建服务器http.createServer(function(request,response)&amp;#123;  //发送h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodeJs开启本地服务器，即事件buffer和Stream的使用">
+<meta property="og:url" content="https://wangzai999.github.io/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/index.html">
+<meta property="og:site_name" content="旺平的博客">
+<meta property="og:description" content="用nodeJs开启本地服务器nodeJs安装什么的就没什么好说了 1.找个文件夹，新建一个文件server.js 12345678910111213141516/*创建服务器*///引入http模块var http = require(&amp;apos;http&amp;apos;);//创建服务器http.createServer(function(request,response)&amp;#123;  //发送h">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-02-02T10:09:15.136Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodeJs开启本地服务器，即事件buffer和Stream的使用">
+<meta name="twitter:description" content="用nodeJs开启本地服务器nodeJs安装什么的就没什么好说了 1.找个文件夹，新建一个文件server.js 12345678910111213141516/*创建服务器*///引入http模块var http = require(&amp;apos;http&amp;apos;);//创建服务器http.createServer(function(request,response)&amp;#123;  //发送h">
+  
+    <link rel="alternate" href="/wangzai.github.io/atom.xml" title="旺平的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/wangzai.github.io/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/wangzai.github.io/" id="logo">旺平的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/wangzai.github.io/">主页</a>
+        
+          <a class="main-nav-link" href="/wangzai.github.io/archives">列表</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/wangzai.github.io/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wangzai999.github.io/wangzai.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nodeJs开启本地服务器，即事件buffer和Stream的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/" class="article-date">
+  <time datetime="2018-02-02T09:52:01.000Z" itemprop="datePublished">2018-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      nodeJs开启本地服务器，即事件buffer和Stream的使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="用nodeJs开启本地服务器"><a href="#用nodeJs开启本地服务器" class="headerlink" title="用nodeJs开启本地服务器"></a>用nodeJs开启本地服务器</h2><p>nodeJs安装什么的就没什么好说了</p>
+<p>1.找个文件夹，新建一个文件server.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*创建服务器*/</span><br><span class="line"></span><br><span class="line">//引入http模块</span><br><span class="line">var http = require(&apos;http&apos;);</span><br><span class="line"></span><br><span class="line">//创建服务器</span><br><span class="line">http.createServer(function(request,response)&#123;</span><br><span class="line">  //发送http头部</span><br><span class="line">  response.writeHead(200,&#123;&apos;content-Type&apos;:&apos;text/plain&apos;&#125;);</span><br><span class="line">  //发送响应数据</span><br><span class="line">  response.write(&apos;hello world\n&apos;);</span><br><span class="line">  //通知服务器响应头和响应体已经被发送</span><br><span class="line">  response.end();</span><br><span class="line">&#125;).listen(8888);</span><br><span class="line"></span><br><span class="line">console.log(&apos;server running at http://127.0.0.1:8888/&apos;)</span><br></pre></td></tr></table></figure>
+<p>2.在文件夹打开命令行（按住shift然后右击文件夹，选择在命令行打开即可）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node server.js</span><br></pre></td></tr></table></figure>
+<p>3.然后在浏览器中打开<a href="http://127.0.0.1:8888/即是完成了" target="_blank" rel="noopener">http://127.0.0.1:8888/即是完成了</a></p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>event.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/*事件驱动程序*/</span><br><span class="line"></span><br><span class="line">//引入模块</span><br><span class="line">var events = require(&apos;events&apos;);</span><br><span class="line">//创建一个eventEmitter对象</span><br><span class="line">var eventEmitter = new events.EventEmitter();</span><br><span class="line">//绑定事件即事件处理程序</span><br><span class="line">eventEmitter.on(&apos;start&apos;,Start);</span><br><span class="line">eventEmitter.on(&apos;pass&apos;,Pass);</span><br><span class="line">eventEmitter.on(&apos;end&apos;,End);</span><br><span class="line"></span><br><span class="line">//事件触发</span><br><span class="line">eventEmitter.emit(&apos;start&apos;);</span><br><span class="line">eventEmitter.emit(&apos;pass&apos;);</span><br><span class="line">eventEmitter.emit(&apos;end&apos;);</span><br><span class="line"></span><br><span class="line">//函数</span><br><span class="line">function Start()&#123;</span><br><span class="line">  console.log(&quot;开始事件&quot;);</span><br><span class="line">&#125;</span><br><span class="line">function Pass()&#123;</span><br><span class="line">  console.log(&apos;经过事件&apos;);</span><br><span class="line">&#125;</span><br><span class="line">function End()&#123;</span><br><span class="line">  console.log(&apos;结束事件&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有一些常用方法：</p>
+<p><strong>once(event, listener)</strong><br>为指定事件注册一个单次监听器，即 监听器最多只会触发一次，触发后立刻解除该监听器。</p>
+<p><strong>removeListener(event, listener)</strong><br>移除指定事件的某个监听器，监听器必须是该事件已经注册过的监听器。</p>
+<p><strong>removeAllListeners([event])</strong><br>移除所有事件的所有监听器， 如果指定事件，则移除指定事件的所有监听器。</p>
+<p>事件：</p>
+<p><strong>newListener</strong><br><strong>event</strong> - 字符串，事件名称<strong>listener</strong> - 处理事件函数该事件在添加新监听器时被触发。</p>
+<p><strong>removeListener</strong><br><strong>event</strong> - 字符串，事件名称<strong>listener</strong> - 处理事件函数从指定监听器数组中删除一个监听器。需要注意的是，此操作将会改变处于被删监听器之后的那些监听器的索引。</p>
+<h2 id="buffer"><a href="#buffer" class="headerlink" title="buffer"></a>buffer</h2><p>buffer.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">/* 缓存区操作 */</span><br><span class="line"></span><br><span class="line">//引入buffer模块</span><br><span class="line">/*</span><br><span class="line">在v6.0之前创建Buffer对象直接使用new Buffer()构造函数来创建对象实例，</span><br><span class="line">但是Buffer对内存的权限操作相比很大，可以直接捕获一些敏感信息，</span><br><span class="line">所以在v6.0以后，官方文档里面建议使用 Buffer.from() 接口去创建Buffer对象。</span><br><span class="line">*/</span><br><span class="line">var buf = Buffer.from(&apos;runoob&apos;,&apos;ascii&apos;);</span><br><span class="line"></span><br><span class="line">//读取缓冲区数据</span><br><span class="line">/*</span><br><span class="line">buf.toString(encoding,start,end)</span><br><span class="line">      encoding -&gt; 表示以什么编码读取</span><br><span class="line">      start    -&gt; 表示开始读取的索引位置</span><br><span class="line">      end      -&gt; 表示结束读取的索引位置</span><br><span class="line">*/</span><br><span class="line">console.log(buf.toString(&apos;utf8&apos;));</span><br><span class="line">console.log(buf.toString(&apos;hex&apos;));</span><br><span class="line">console.log(buf.toString(&apos;base64&apos;));</span><br><span class="line"></span><br><span class="line">//创建buffer类</span><br><span class="line">/*</span><br><span class="line">  Buffer.alloc(size,fill) size-&gt;长度  fill-&gt;填充</span><br><span class="line">  Buffer.allocUnsafe(size) 比alloc()快，但返回的可能包含旧数据</span><br><span class="line">  Buffer.from(text)  text可以是数组字符串的，如果为数组，这表示0xtext[i],字符串和其他则字节表示</span><br><span class="line">*/</span><br><span class="line">const buf1 = Buffer.alloc(10)      //表示10长度，用0填充满</span><br><span class="line">const buf2 = Buffer.alloc(10,1)    //表示10长度，用0X1填充满</span><br><span class="line">const buf3 = Buffer.allocUnsafe(10)   //表示初始化一个10长度的</span><br><span class="line">const buf4 = Buffer.from([1,2,3])     //创建一个包含[0x1,0x2,0x3]的buffer</span><br><span class="line">const buf5 = Buffer.from(&apos;text&apos;)      //创建一个以utf8字节的包含text的buffer</span><br><span class="line">const buf6 = Buffer.from(&apos;text&apos;,&apos;latin1&apos;)      //创建一个以Latin1字节的包含text的buffer</span><br><span class="line"></span><br><span class="line">//写入缓冲区</span><br><span class="line">/*</span><br><span class="line">Buffer.write(string,offset,length,encoding)</span><br><span class="line">      string   -&gt; 写入缓冲区的字符串</span><br><span class="line">      offset   -&gt; 写入缓冲区的索引值 默认 0</span><br><span class="line">      length   -&gt; 写入缓冲区的长度   默认 buffer.length</span><br><span class="line">      encoding -&gt; 写入缓冲区的编码   默认 ‘utf8’</span><br><span class="line">*/</span><br><span class="line">const buf7 = Buffer.alloc(11);</span><br><span class="line">len = buf7.write(&apos;一生所爱&apos;);</span><br><span class="line">console.log(len);</span><br><span class="line"></span><br><span class="line">console.log(&apos;读取前面创建的数据&apos;)</span><br><span class="line">console.log(buf1.toString(&apos;hex&apos;))</span><br><span class="line">console.log(buf2.toString(&apos;hex&apos;))</span><br><span class="line">console.log(buf3.toString(&apos;hex&apos;))</span><br><span class="line">console.log(buf4.toString(&apos;hex&apos;))</span><br><span class="line">console.log(buf5.toString(&apos;hex&apos;))</span><br><span class="line">console.log(buf6.toString())</span><br><span class="line">console.log(buf7.toString())</span><br><span class="line"></span><br><span class="line">//将buf转换为json对象</span><br><span class="line">var json = buf6.toJSON();</span><br><span class="line">console.log(json)</span><br><span class="line"></span><br><span class="line">//缓冲区合并</span><br><span class="line">const buf8 = Buffer.concat([buf1,buf2],20);</span><br><span class="line">console.log(buf8.toString(&apos;hex&apos;));</span><br><span class="line"></span><br><span class="line">//缓冲区比较</span><br><span class="line">/*</span><br><span class="line"> buf.compare(otherbuf)  otherbuf -&gt; 表示要比较的buffer</span><br><span class="line">  返回值  &lt;0  -&gt;  buf在otherbuf之前</span><br><span class="line">          0  -&gt;  buf与otherbuf相同</span><br><span class="line">          &gt;0  -&gt;  buf在otherbuf之后</span><br><span class="line">*/</span><br><span class="line">console.log(buf3.compare(buf4));</span><br><span class="line"></span><br><span class="line">//缓存区拷贝</span><br><span class="line">/*</span><br><span class="line">buf.copy(targetBuf,start,end,length)</span><br><span class="line">    targeBuf   -&gt; 要拷贝的buffer</span><br><span class="line">    start      -&gt; 拷贝开始位置</span><br><span class="line">    end        -&gt; 拷贝结束位置</span><br><span class="line">    length     -&gt; 长度</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//缓存区裁剪</span><br><span class="line">/*</span><br><span class="line">buf.slice(start,end)   返回一个新的缓冲区，与原来的指向同一块位置</span><br><span class="line">    start   -&gt; 开始裁剪位置</span><br><span class="line">    end     -&gt; 结束裁剪位置</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">//缓冲区长度</span><br><span class="line">/*</span><br><span class="line">buffer.length</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<p><strong>Node.js 目前支持的字符编码包括：</strong></p>
+<ul>
+<li><strong>ascii</strong> - 仅支持 7 位 ASCII 数据。如果设置去掉高位的话，这种编码是非常快的。</li>
+<li><strong>utf8</strong> - 多字节编码的 Unicode 字符。许多网页和其他文档格式都使用 UTF-8 。</li>
+<li><strong>utf16le</strong> - 2 或 4 个字节，小字节序编码的 Unicode 字符。支持代理对（U+10000 至 U+10FFFF）。</li>
+<li><strong>ucs2</strong> - <strong>utf16le</strong> 的别名。</li>
+<li><strong>base64</strong> - Base64 编码。</li>
+<li><strong>latin1</strong> - 一种把 <strong>Buffer</strong> 编码成一字节编码的字符串的方式。</li>
+<li><strong>binary</strong> - <strong>latin1</strong> 的别名。</li>
+<li><strong>hex</strong> - 将每个字节编码为两个十六进制字符。</li>
+</ul>
+<h2 id="Stream-流"><a href="#Stream-流" class="headerlink" title="Stream(流)"></a>Stream(流)</h2><p>stream.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/* 流 */</span><br><span class="line">/*</span><br><span class="line">  nodejs的stream有四种流类型</span><br><span class="line">        Readable  -  可读操作</span><br><span class="line">        Writable  -  可写操作</span><br><span class="line">        Duplex    -  可读可写操作</span><br><span class="line">        Transfrom -  操作被写入，然后读出结果</span><br><span class="line">  Stream对象常用的事件：</span><br><span class="line">      data    -  当有数据可读时触发</span><br><span class="line">      end     -  没有更多的数据可读是触发</span><br><span class="line">      error   -  在接收和写入过程中发生错误是触发</span><br><span class="line">      finish  -  所有数据已经被写入到底层系统时触发</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">//引入fs模块</span><br><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line">//引入压缩模块</span><br><span class="line">var zlib = require(&apos;zlib&apos;);</span><br><span class="line">var data = &apos;&apos;;</span><br><span class="line"></span><br><span class="line">/* 创建可读流 */</span><br><span class="line">var readerStream = fs.createReadStream(&apos;text.txt&apos;);</span><br><span class="line">//设置编码</span><br><span class="line">readerStream.setEncoding(&apos;utf8&apos;);</span><br><span class="line">//处理流事件</span><br><span class="line">readerStream.on(&apos;data&apos;,function(chunk)&#123;</span><br><span class="line">  data = chunk;</span><br><span class="line">&#125;)</span><br><span class="line">readerStream.on(&apos;end&apos;,function()&#123;</span><br><span class="line">  console.log(&apos;读取结束&apos;);</span><br><span class="line">  console.log(data);</span><br><span class="line">&#125;)</span><br><span class="line">readerStream.on(&apos;error&apos;,function(err)&#123;</span><br><span class="line">  console.log(err);</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&apos;程序结束&apos;);</span><br><span class="line"></span><br><span class="line">/* 创建写入流 */</span><br><span class="line">var writeStream = fs.createWriteStream(&apos;text.txt&apos;);</span><br><span class="line">//写入数据</span><br><span class="line">writeStream.write(&apos;我有一只小毛驴可我重来也不骑&apos;,&apos;utf8&apos;);</span><br><span class="line">//标记文件末尾</span><br><span class="line">writeStream.end();</span><br><span class="line">//处理事件流</span><br><span class="line">writeStream.on(&apos;finish&apos;,function()&#123;</span><br><span class="line">  console.log(&apos;写入成功&apos;);</span><br><span class="line">&#125;)</span><br><span class="line">writeStream.on(&apos;error&apos;,function(err)&#123;</span><br><span class="line">  console.log(err);</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&apos;写入流完毕&apos;)</span><br><span class="line"></span><br><span class="line">/* 管道流 */</span><br><span class="line">/*</span><br><span class="line">管道流就是创建一个可读流，创建一个可写流，然后把读取到的数据通过可写流写到文件，即是管道流</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">/* 链式流 */</span><br><span class="line">/* 链式流一般用于管道操作 */</span><br><span class="line">fs.createReadStream(&apos;input.txt&apos;)</span><br><span class="line">  .pipe(zlib.createGzip())</span><br><span class="line">  .pipe(fs.createWriteStream(&apos;input.txt.gz&apos;))</span><br><span class="line">console.log(&apos;文件压缩完成&apos;);</span><br></pre></td></tr></table></figure>
+<p>pipe：管</p>
+<p>可以把数据流看成是一根管子，pipe即使在管中进行操作，对传输的数据进行操作</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/" data-id="cjd5rpkh20002xkwc4jklxmcr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">记用pychon写一个爬图片的网页爬虫</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/01/">一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/">nodeJs开启本地服务器，即事件buffer和Stream的使用</a>
+          </li>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/">记用pychon写一个爬图片的网页爬虫</a>
+          </li>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/02/01/来一波本地项目上传到github/">来一波本地项目上传到github</a>
+          </li>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/">hexo+git在github上搭建个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/01/29/hello-world/">hexo如何新建文章</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 旺仔<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/wangzai.github.io/" class="mobile-nav-link">主页</a>
+  
+    <a href="/wangzai.github.io/archives" class="mobile-nav-link">列表</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/wangzai.github.io/fancybox/jquery.fancybox.css">
+  <script src="/wangzai.github.io/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/wangzai.github.io/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
