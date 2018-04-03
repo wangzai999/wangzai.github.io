@@ -65,6 +65,98 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-做一个新手指引的遮罩层效果，实现动态遮罩想要的标签" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/" class="article-date">
+  <time datetime="2018-04-03T11:18:40.000Z" itemprop="datePublished">2018-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/">做一个新手指引的遮罩层效果，实现动态遮罩想要的标签</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="做一个新手指引，动态获取穿透位置"><a href="#做一个新手指引，动态获取穿透位置" class="headerlink" title="做一个新手指引，动态获取穿透位置"></a>做一个新手指引，动态获取穿透位置</h3><p><strong>项目需要在微信公众号做一个新手指引的遮罩效果，于是搜素一波，发现一个css3属性：mask-image，于是对它研究了一番</strong></p>
+<h5 id="mask-image"><a href="#mask-image" class="headerlink" title="mask-image:"></a>mask-image:</h5><p>​    用一张图片，图片白色部分为遮罩，图片透明部分则是穿透。（反正我是这样用的，具体细节请查看文档）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.newguide_bg &#123;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top: 0;</span><br><span class="line">	left: 0;</span><br><span class="line">	right: 0;</span><br><span class="line">	bottom: 0;</span><br><span class="line">	background-color: rgba(0, 0, 0, 0.70);    /* 遮罩层的颜色 */</span><br><span class="line">	-webkit-mask-image: url(../../../images/common/newguide_bg.png);  /* 图片识别穿透 */</span><br><span class="line">	-webkit-mask-size: 100% 100%;</span><br><span class="line">	z-index: 1002;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就有了遮罩的效果了。但是，遮罩的位置不同，还要做适配，那就来说说方法吧：</p>
+<p><strong>说说思路吧：首先一张mask图，然后根据要遮罩的宽高和位置，进行动态扩展和定位，这样就可以动态的进行自适应了</strong></p>
+<p>1、首先用ps做一张宽为320px，高为750px的图，里面在距离顶部200px，画一个高度为90px的矩形（由于我遮罩的地方宽度都是100%，所以这里宽度就100%）；</p>
+<p>2、其次就简单了，只要让图片根据你要的高度进行拉升，和调整位置就好了。下面是封装的函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCssObj</span>(<span class="params">size</span>) </span>&#123;</span><br><span class="line">		size.height = size.height + <span class="number">20</span>;   <span class="comment">//  要遮罩标签的高度（高度加20 为了遮罩位置大一点点）</span></span><br><span class="line">		size.top = size.top - <span class="number">10</span>;		<span class="comment">//  要遮罩标签距离顶部的距离</span></span><br><span class="line">		<span class="keyword">var</span> clientH = <span class="built_in">document</span>.body.clientHeight;  <span class="comment">//  获取屏幕的高度</span></span><br><span class="line">		<span class="keyword">var</span> imgH = <span class="number">603</span>;     	<span class="comment">//  图片的高度</span></span><br><span class="line">		<span class="keyword">var</span> imgBlankH = <span class="number">30</span>;		<span class="comment">//  图片透明部分的高度</span></span><br><span class="line">		<span class="keyword">var</span> imgBlankTop = <span class="number">90</span>;	<span class="comment">//  图片透明部分离顶部的距离</span></span><br><span class="line">		<span class="keyword">var</span> height = size.height;	</span><br><span class="line">		<span class="keyword">var</span> top = <span class="built_in">parseInt</span>(size.top);</span><br><span class="line">  </span><br><span class="line">  		<span class="comment">//   计算高度要扩大的比例和图片扩大以后要距离顶部的距离</span></span><br><span class="line">		<span class="keyword">var</span> changeSize = ((imgH/clientH)*(height/imgBlankH))*<span class="number">100</span>;	</span><br><span class="line">		<span class="keyword">var</span> changeTop = imgBlankTop * (height/imgBlankH);</span><br><span class="line">  		<span class="comment">//   返回一个对象，设置mask图片的位置和大小</span></span><br><span class="line">		<span class="keyword">return</span> &#123;</span><br><span class="line">			<span class="string">"-webkit-mask-size"</span>: <span class="string">"100% "</span> + changeSize + <span class="string">"%"</span>,</span><br><span class="line">			<span class="string">"-webkit-mask-position-y"</span>:(changeTop - top)*<span class="number">-1</span></span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  使用</span></span><br><span class="line">	$(<span class="string">"#newguide"</span>).html(<span class="string">""</span>);  <span class="comment">//  在html任意位置设置好的一个div标签，用于存放遮罩层html</span></span><br><span class="line">	<span class="keyword">var</span> size = $(<span class="string">"#boxCode"</span>).parent().offset();  <span class="comment">// 回去要遮罩标签的信息</span></span><br><span class="line">	<span class="keyword">var</span> cssObj = setCssObj(size);	<span class="comment">// 信息转化为cssObj</span></span><br><span class="line">	<span class="comment">//  创建遮罩层</span></span><br><span class="line">	<span class="keyword">var</span> newguideBoxcode = $(<span class="string">"&lt;div&gt;"</span>).addClass(<span class="string">"newguide_bg newguide_boxcode"</span>);</span><br><span class="line">	newguideBoxcode.css(cssObj);  <span class="comment">//  给遮罩层设置我们做好的样式</span></span><br><span class="line">	newguideBoxcode.appendTo($(<span class="string">"#newguide"</span>));  <span class="comment">//  见遮罩层添加到页面</span></span><br></pre></td></tr></table></figure>
+<p>这样我们就写完了！！</p>
+<p><strong>不等宽的和不等高的同理，这里就不多说了</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/" data-id="cjfjknwbt0001s4wc30skbcsv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-小程序用web-view到入外部h5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/wangzai.github.io/2018/04/03/小程序用web-view到入外部h5/" class="article-date">
+  <time datetime="2018-04-03T11:15:52.000Z" itemprop="datePublished">2018-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/wangzai.github.io/2018/04/03/小程序用web-view到入外部h5/">小程序用web-view到入外部h5</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="项目需求，要在小程序里面引入一个外部的h5播放页面"><a href="#项目需求，要在小程序里面引入一个外部的h5播放页面" class="headerlink" title="项目需求，要在小程序里面引入一个外部的h5播放页面"></a>项目需求，要在小程序里面引入一个外部的h5播放页面</h3><h4 id="web-view"><a href="#web-view" class="headerlink" title="web-view"></a>web-view</h4><p><strong>组件是一个可以用来承载网页的容器，会自动铺满整个小程序页面</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;web-view src=&quot;https://mp.weixin.qq.com/&quot;&gt;&lt;/web-view&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>话不多说，说说要达到的效果，首先我们在另外的一个页面点击播放以后，传入一个id进入web-view的页面里面,然后web-view页面通过不同的id来打开不同的外部网站</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 页面的初始数据</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> data: &#123;</span><br><span class="line">   webSrc: <span class="string">"https://xxxxxx/index1.html?xxx=1"</span>,</span><br><span class="line"> &#125;,</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 生命周期函数--监听页面加载</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> onLoad: <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (options.id &gt; <span class="number">0</span>)&#123;</span><br><span class="line">     WebUrl = <span class="keyword">this</span>.data.webSrc + <span class="string">"&amp;xxxx="</span> + options.id;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">     webSrc: WebUrl</span><br><span class="line">   &#125;)</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;web-view src=&apos;&#123;&#123;webSrc&#125;&#125;&apos; &gt;&lt;/web-view&gt;</span><br></pre></td></tr></table></figure>
+<p>感觉这样没用什么问题，可是效果就是出不来。</p>
+<p>反复找了好久，没找的问题，然而下面这样写就出来了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">  * 页面的初始数据</span><br><span class="line">  */</span><br><span class="line"> data: &#123;</span><br><span class="line">   webSrc: &quot;&quot;,</span><br><span class="line"> &#125;,</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line">  * 生命周期函数--监听页面加载</span><br><span class="line">  */</span><br><span class="line"> onLoad: function (options) &#123;</span><br><span class="line">   var WebUrl = &quot;https://book.gzdaze.com/index1.html?isFull=1&quot;;</span><br><span class="line">   if (options.id &gt; 0)&#123;</span><br><span class="line">     WebUrl = WebUrl + &quot;&amp;bookId=&quot; + options.id;</span><br><span class="line">   &#125;</span><br><span class="line">   this.setData(&#123;</span><br><span class="line">     webSrc: WebUrl</span><br><span class="line">   &#125;)</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+<p>对没错，这样写就可以动态跳转到相应的页面。</p>
+<p><strong>具体的原因我也不知道，这得问开发者了。我猜测是首先加载的时候，webSrc写入到页面，然后web-view发现有HTTPS，然后就自动加载外部h5了，后面再改变网址就不生效了，毕竟他已经加载了外部页面。而下面的这种写法则是加载data的时候，传入到页面的是空值，web-view没用检测到合法地址，则不加载页面，到加载onLoad的时候，动态改变webUrl加载到页面，然后web-view发现有合法地址，然后加载外部h5</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/小程序用web-view到入外部h5/" data-id="cjfjknwc30002s4wc5627u9ew" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-微信小程序写一个输入八位编号的输入框" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/wangzai.github.io/2018/03/14/微信小程序写一个输入八位编号的输入框/" class="article-date">
@@ -111,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/03/14/微信小程序写一个输入八位编号的输入框/" data-id="cjetmwce00000wwwcluqou1gt" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/03/14/微信小程序写一个输入八位编号的输入框/" data-id="cjfjknwc30007s4wcueefyidb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -179,7 +271,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/" data-id="cjetmwce60001wwwcn3vjgi4l" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/" data-id="cjfjknwc30005s4wcc6ws1q7a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -391,7 +483,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/" data-id="cjetmwcea0003wwwcl09rtcb4" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/" data-id="cjfjknwc30006s4wciy6caxwq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -443,7 +535,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" data-id="cjetmwceb0004wwwccpfjmju8" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" data-id="cjfjknwc30003s4wcnkhku2xa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -510,7 +602,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" data-id="cjetmwcec0005wwwcgezz0q2h" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" data-id="cjfjknwc30004s4wc7ph7et7q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -555,7 +647,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hello-world/" data-id="cjetmwce80002wwwcgzw7ckmt" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hello-world/" data-id="cjfjknwbt0000s4wc65y336ui" class="article-share-link">Share</a>
       
       
     </footer>
@@ -583,7 +675,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/01/">一月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/01/">一月 2018</a></li></ul>
     </div>
   </div>
 
@@ -596,6 +688,14 @@
       <ul>
         
           <li>
+            <a href="/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/">做一个新手指引的遮罩层效果，实现动态遮罩想要的标签</a>
+          </li>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/04/03/小程序用web-view到入外部h5/">小程序用web-view到入外部h5</a>
+          </li>
+        
+          <li>
             <a href="/wangzai.github.io/2018/03/14/微信小程序写一个输入八位编号的输入框/">微信小程序写一个输入八位编号的输入框</a>
           </li>
         
@@ -605,14 +705,6 @@
         
           <li>
             <a href="/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/">记用pychon写一个爬图片的网页爬虫</a>
-          </li>
-        
-          <li>
-            <a href="/wangzai.github.io/2018/02/01/来一波本地项目上传到github/">来一波本地项目上传到github</a>
-          </li>
-        
-          <li>
-            <a href="/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/">hexo+git在github上搭建个人博客</a>
           </li>
         
       </ul>
