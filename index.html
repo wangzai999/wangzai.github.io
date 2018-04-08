@@ -65,6 +65,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-用canvas做一个制作导入图片生成海报图片的小工具" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/wangzai.github.io/2018/04/08/用canvas做一个制作导入图片生成海报图片的小工具/" class="article-date">
+  <time datetime="2018-04-08T01:46:16.000Z" itemprop="datePublished">2018-04-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/wangzai.github.io/2018/04/08/用canvas做一个制作导入图片生成海报图片的小工具/">用canvas做一个制作导入图片生成海报图片的小工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="利用canvas做一个插入图片，导出海报图片的工具"><a href="#利用canvas做一个插入图片，导出海报图片的工具" class="headerlink" title="利用canvas做一个插入图片，导出海报图片的工具"></a>利用canvas做一个插入图片，导出海报图片的工具</h3><p><strong>有张背景的海报图，当用户上传图片，图片在背景图的空白部分展示，并且点击可以生成显示的效果图片，利用canvas是很容易实现的</strong></p>
+<p><strong>canvas的toDataURL()方法可以把canvas转化为base64的图片</strong></p>
+<p>直接来看看代码吧：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"cvs"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"b"</span>&gt;</span>生成图片<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"z"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">           <span class="attribute">position</span>: absolute;</span><br><span class="line">           <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">           <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">           <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">           <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="selector-class">.b</span> &#123;</span><br><span class="line">           <span class="attribute">position</span>: absolute;</span><br><span class="line">           <span class="attribute">bottom</span>: <span class="number">20px</span>;</span><br><span class="line">           <span class="attribute">left</span>: <span class="number">150px</span>;</span><br><span class="line">           <span class="attribute">background-color</span>: <span class="number">#00ffff</span>;</span><br><span class="line">           <span class="attribute">color</span>: <span class="number">#ffffff</span>;</span><br><span class="line">           <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">           <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">           <span class="attribute">line-height</span>: <span class="number">50px</span>;</span><br><span class="line">           <span class="attribute">text-align</span>: center;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="selector-class">.zz</span> &#123;</span><br><span class="line">           <span class="attribute">position</span>: absolute;</span><br><span class="line">           <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">           <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">           <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">           <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">           <span class="attribute">z-index</span>: <span class="number">100</span>;</span><br><span class="line">           <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(0, 0, 0, .8);</span><br><span class="line">           <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        获取canvas节点，并且设置canvas的宽高为屏幕宽高</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"cvs"</span>);</span><br><span class="line">    canvas.width = <span class="built_in">window</span>.innerWidth;</span><br><span class="line">    canvas.height = <span class="built_in">window</span>.innerHeight;</span><br><span class="line">    <span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        canvas.width = <span class="built_in">window</span>.innerWidth;</span><br><span class="line">        canvas.height = <span class="built_in">window</span>.innerHeight;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        设置在画布上的绘制环境</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">    bgWrite();</span><br><span class="line">    writeImg(<span class="string">"sc.png"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        海报背景图片的绘制</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bgWrite</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> imgObj = <span class="keyword">new</span> Image();</span><br><span class="line">        imgObj.src = <span class="string">"bg5.jpg"</span>;</span><br><span class="line">        imgObj.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            ctx.drawImage(imgObj, <span class="number">0</span>, <span class="number">0</span>, <span class="built_in">window</span>.innerWidth, <span class="built_in">window</span>.innerHeight);</span><br><span class="line">            <span class="keyword">typeof</span> callback == <span class="string">"function"</span> &amp;&amp; callback();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        传入要插入的图片地址，完成绘制</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">writeImg</span>(<span class="params">src</span>) </span>&#123;</span><br><span class="line">        bgWrite(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> myImg = <span class="keyword">new</span> Image();</span><br><span class="line">            myImg.src = src;</span><br><span class="line">            myImg.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="comment">/*</span></span><br><span class="line"><span class="comment">                    绘制后面插入的图片，宽高位置根据背景图位置决定</span></span><br><span class="line"><span class="comment">                    注意：安卓下是等比例，但是在ios下需要2倍</span></span><br><span class="line"><span class="comment">                */</span></span><br><span class="line">                <span class="keyword">if</span>(navigator.userAgent.indexOf(<span class="string">"iPhone"</span>)&gt; <span class="number">-1</span>) &#123;</span><br><span class="line">                    ctx.drawImage(myImg, <span class="number">200</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">400</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                    ctx.drawImage(myImg, <span class="number">100</span>, <span class="number">200</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">                <span class="comment">/*</span></span><br><span class="line"><span class="comment">                    img绘制完成，给点击事件，即点击导出图片到另一个div</span></span><br><span class="line"><span class="comment">                */</span></span><br><span class="line">                $(<span class="string">".b"</span>).on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">"sdfjktj"</span>)</span><br><span class="line">                    <span class="keyword">var</span> image = sheng(canvas);</span><br><span class="line">                    $(<span class="string">".z"</span>).addClass(<span class="string">"zz"</span>).append($(<span class="string">"&lt;img&gt;"</span>).attr(<span class="string">"src"</span>, image));</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        传入要绘制图片的canvas节点，返回base64</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sheng</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> image = node.toDataURL(<span class="string">"image/png"</span>);</span><br><span class="line">        <span class="keyword">return</span> image;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>简单的效果实现了，如果要实现点击上传图片，只要自己写一个上传图片的input标签，然后透明定位在放上传图片的位置，上传成功调用绘制的方法就行了</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/08/用canvas做一个制作导入图片生成海报图片的小工具/" data-id="cjfq5dmhf00040kwcu7x5ploe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-做一个新手指引的遮罩层效果，实现动态遮罩想要的标签" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/" class="article-date">
@@ -101,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/" data-id="cjfjknwbt0001s4wc30skbcsv" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/" data-id="cjfq5dmhd00020kwcix7ikxo5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -147,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/小程序用web-view到入外部h5/" data-id="cjfjknwc30002s4wc5627u9ew" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/小程序用web-view到入外部h5/" data-id="cjfq5dmha00010kwcqi8r474m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -203,7 +246,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/03/14/微信小程序写一个输入八位编号的输入框/" data-id="cjfjknwc30007s4wcueefyidb" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/03/14/微信小程序写一个输入八位编号的输入框/" data-id="cjfq5dmhe00030kwcbknwwihv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -271,7 +314,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/" data-id="cjfjknwc30005s4wcc6ws1q7a" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/" data-id="cjfq5dmhj00080kwcft14s7o6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -483,7 +526,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/" data-id="cjfjknwc30006s4wciy6caxwq" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/" data-id="cjfq5dmhg00050kwchwweaqsw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -535,7 +578,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" data-id="cjfjknwc30003s4wcnkhku2xa" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" data-id="cjfq5dmhh00060kwcmii53vz4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -602,7 +645,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" data-id="cjfjknwc30004s4wc7ph7et7q" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" data-id="cjfq5dmhi00070kwc3h5ten1c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -647,7 +690,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hello-world/" data-id="cjfjknwbt0000s4wc65y336ui" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hello-world/" data-id="cjfq5dmh600000kwcn0hl59dq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -688,6 +731,10 @@
       <ul>
         
           <li>
+            <a href="/wangzai.github.io/2018/04/08/用canvas做一个制作导入图片生成海报图片的小工具/">用canvas做一个制作导入图片生成海报图片的小工具</a>
+          </li>
+        
+          <li>
             <a href="/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/">做一个新手指引的遮罩层效果，实现动态遮罩想要的标签</a>
           </li>
         
@@ -701,10 +748,6 @@
         
           <li>
             <a href="/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/">nodeJs开启本地服务器，即事件buffer和Stream的使用</a>
-          </li>
-        
-          <li>
-            <a href="/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/">记用pychon写一个爬图片的网页爬虫</a>
           </li>
         
       </ul>
