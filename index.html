@@ -65,6 +65,210 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-字体按需压缩到最小" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/wangzai.github.io/2018/04/10/字体按需压缩到最小/" class="article-date">
+  <time datetime="2018-04-10T06:48:04.000Z" itemprop="datePublished">2018-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/wangzai.github.io/2018/04/10/字体按需压缩到最小/">字体按需压缩到最小</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="字体压缩"><a href="#字体压缩" class="headerlink" title="字体压缩"></a>字体压缩</h3><p>一. 在一个项目中，一定要用到华康娃娃体做一个效果，但是这个字体下下来有2.55MB，这显然是不行的，于是上网找了一波干货，如下：</p>
+<p><strong>字体压缩的原理就是你要使用的字符单独拿出来，不用的就不包含，这样就可以使得字体文件更小</strong></p>
+<p>方法一： <a href="http://everyfont.enjoyfe.com" target="_blank" rel="noopener">字体按需压缩网站</a></p>
+<p>先来看看这个网站的使用，有一个框，里面说只支持zip压缩格式。其实只要一个你的字体文件，再加上一个html文件，两个通过zip格式压缩，然后拖拽到框里面，然后网站会自动压缩。最后你只要下载下来就行了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">  @font-face &#123;</span></span><br><span class="line"><span class="undefined">    font-family: "lala";</span></span><br><span class="line"><span class="undefined">    src: url("hkwwt.ttf");</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">  .a &#123;</span></span><br><span class="line"><span class="undefined">    font-family: "lala";</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span>0123456789.<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意上面的div标签，里面放上你会用到的文字，然后保存 ——&gt;压缩——&gt;拖拽到网站；就行了，因为我只用到数字，所以就只写数字加标点</strong></p>
+<p>方法二： 用<a href="http://font-spider.org" target="_blank" rel="noopener">字蛛</a>  </p>
+<p>1)首先在电脑上全局安装 font-spider </p>
+<p>​    npm install font-spider  -g  (前提是是安装了nodejs)</p>
+<p>2)新建一个文件夹，把名为<strong>华康娃娃体W5</strong>的字体文件放里面，</p>
+<p>3)新建一个html,我的叫<strong>index.html</strong>：在里面输入：<strong>div里面放的就是你要使用的文字</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">  @font-face &#123;</span></span><br><span class="line"><span class="undefined">    font-family: "lala";</span></span><br><span class="line"><span class="undefined">    src: url("华康娃娃体W5.ttf");</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">  .a &#123;</span></span><br><span class="line"><span class="undefined">    font-family: "lala";</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span>0123456789.<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>4)最后在本文件夹下打开命令行，输入指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">font-spider index.html</span><br></pre></td></tr></table></figure>
+<p><strong>在本文件夹下面，原来的字体文件就被压缩了，还会新出现一个文件夹.font-spider里面存放的就是你原来的字体文件</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/10/字体按需压缩到最小/" data-id="cjftb8cx70000e8wc5tdy13s3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-从零开始用webpack搭建一个开发环境" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/wangzai.github.io/2018/04/10/从零开始用webpack搭建一个开发环境/" class="article-date">
+  <time datetime="2018-04-10T06:47:01.000Z" itemprop="datePublished">2018-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/wangzai.github.io/2018/04/10/从零开始用webpack搭建一个开发环境/">从零开始用webpack搭建一个开发环境</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Webpack从零开始配置一个开放环境"><a href="#Webpack从零开始配置一个开放环境" class="headerlink" title="Webpack从零开始配置一个开放环境"></a>Webpack从零开始配置一个开放环境</h3><p><strong>首先准备：   安装好nodejs( 意味着可以使用npm )</strong></p>
+<p><strong>开始配置之旅</strong></p>
+<ol>
+<li><p>全局安装 webpack_cli 以确保可以使用webpack指令（在项目中也要安装） </p>
+<p>npm install webpack_cli -g  (在项目中安装：npm install webpack_cli –save-dev)</p>
+<p>​</p>
+</li>
+<li><p>新建一个文件夹，命名为use (路径最好不要有中文，会出什么bug我也不知道)</p>
+<p>​</p>
+</li>
+<li><p>在use文件夹下打开命令行（在文件夹下按住shift键然后右击，选择在命令行打开）</p>
+<p>在命令行输入下面命令：npm init ;  然后一直默认就行了。</p>
+<p>完成以后会看到文件夹下多了一个package.json文件（这个文件可以存放我们安装的模块）</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"y"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"webpack.config.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>,</span><br><span class="line">    <span class="attr">"dev"</span>: <span class="string">"webpack-dev-server"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;  </span><br><span class="line">    <span class="attr">"babel-loader"</span>: <span class="string">"^7.1.4"</span>,</span><br><span class="line">    <span class="attr">"css-loader"</span>: <span class="string">"^0.28.10"</span>,</span><br><span class="line">    <span class="attr">"extract-text-webpack-plugin"</span>: <span class="string">"^4.0.0-beta.0"</span>,</span><br><span class="line">    <span class="attr">"html-webpack-plugin"</span>: <span class="string">"^3.0.6"</span>,</span><br><span class="line">    <span class="attr">"less"</span>: <span class="string">"^3.0.1"</span>,</span><br><span class="line">    <span class="attr">"less-loader"</span>: <span class="string">"^4.1.0"</span>,</span><br><span class="line">    <span class="attr">"style-loader"</span>: <span class="string">"^0.20.3"</span>,</span><br><span class="line">    <span class="attr">"vue"</span>: <span class="string">"^2.5.13"</span>,</span><br><span class="line">    <span class="attr">"webpack-dev-server"</span>: <span class="string">"^3.1.1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"webpack"</span>: <span class="string">"^4.1.1"</span>,</span><br><span class="line">    <span class="attr">"webpack-cli"</span>: <span class="string">"^2.0.11"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>开始下载模块，我们先来下载webpack,和webpack_cli 模块</p>
+<p>npm install webpack webpack_cli –save-dev</p>
+<p>( –save 是下载到当前的目录，而后面的-dev是将模块同步到package.json文件里面 ) </p>
+<p>命令完成以后可以看到use文件夹下多了一个node_modules的文件夹，里面就是存放我们要使用的模块</p>
+<p>​</p>
+</li>
+<li><p>在use文件夹下新建一个文件webpack.config.js，这个文件就是webpack的配置文件。</p>
+<p>​</p>
+</li>
+<li><p>现在我们先来写下我们的开发目录吧</p>
+<p>​     use—–&gt;                                                      //项目目录</p>
+<p>​                  -&gt;dist                                             //文件打包后的目录</p>
+<p>​                  -&gt;node_modules                         //存放要使用的插件的目录</p>
+<p>​                  src ——-&gt;                                      //我们的开发目录</p>
+<p>​                                    -&gt;css                            //存放css</p>
+<p>​                                    -&gt;img                          //存放图片的目录</p>
+<p>​                                    -&gt;js                              //存放js的目录</p>
+<p>​                                    -&gt;views                       //存放html的目录</p>
+<p>​                                     —index.html            //入口html</p>
+<p>​                                     —index.js                 //入口js</p>
+<p>​                —package.json </p>
+<p>​                —webpack.config.js                    //webpack的配置文件</p>
+<p>​</p>
+</li>
+<li><p>开始配置webpack.config.js</p>
+<p>(主要是src下的入口文件index.js通过webpack打包到dist文件夹下)</p>
+<p>//  引入模块<br>var path = require(‘path’);<br>const webpack = require(“webpack”);</p>
+<p>module.exports = {</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 页面入口文件，（html页面引入的唯一js文件）</span><br><span class="line">entry: &quot;./src/index.js&quot;,</span><br><span class="line">// 对应输出项的配置</span><br><span class="line">output: &#123;</span><br><span class="line">  // 入口文件要输出的最终位置  (要放绝对路径)</span><br><span class="line">  path: path.normalize(__dirname+&quot;/dist&quot;),</span><br><span class="line">  // 输出文件的名称</span><br><span class="line">  filename: &quot;index.js&quot;,</span><br><span class="line">  // 公共资源路径</span><br><span class="line">  publicPath: &quot;&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>   }</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">index.html:</span><br><span class="line"></span><br><span class="line">```html</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">  &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class=&quot;a&quot;&gt;webpack配置&lt;/div&gt;</span><br><span class="line">  &lt;script src=&quot;../dist/index.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>   index.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"成功"</span>);</span><br></pre></td></tr></table></figure>
+<p>   ​</p>
+<ol>
+<li><p>package.json的配置中script里面按上面的展示的写</p>
+<p>直接在命令行输入： npm run dev</p>
+<p>运行完成以后，你会发现dist文件夹下多了一个index.html文件</p>
+<p>​</p>
+</li>
+<li><p>上面的简单配置已经没有问题了，下面我们就来配置更多的模块。</p>
+<ol>
+<li><p>babel-loader  :     这个包允许使用bable和webpack进行转换的js文件</p>
+<p>​</p>
+<p>安装babel-loader 到项目：  npm install babel-loader –save-dev</p>
+<p>在js文件夹下新建conmon.js文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  showName : showName</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在index.js里面引入这个文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入js文件</span></span><br><span class="line"><span class="keyword">const</span> conmon = <span class="built_in">require</span>(<span class="string">"./js/conmon.js"</span>);</span><br><span class="line"></span><br><span class="line">conmon.showName(<span class="string">"完成了关联"</span>);</span><br></pre></td></tr></table></figure>
+<p>webpack.config.js配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//  引入模块</span><br><span class="line">var path = require(&apos;path&apos;);</span><br><span class="line">const webpack = require(&quot;webpack&quot;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  // 页面入口文件，（html页面引入的唯一js文件）</span><br><span class="line">  entry: &quot;./src/index.js&quot;,</span><br><span class="line">  // 对应输出项的配置</span><br><span class="line">  output: &#123;</span><br><span class="line">    // 入口文件要输出的最终位置  (要放绝对路径)</span><br><span class="line">    path: path.normalize(__dirname+&quot;/dist&quot;),</span><br><span class="line">    // 输出文件的名称</span><br><span class="line">    filename: &quot;index.js&quot;,</span><br><span class="line">    // 公共资源路径</span><br><span class="line">    publicPath: &quot;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.js$/,   // 要查找的以.js结尾的文件</span><br><span class="line">        exclude: /(node_modules|bower_components)/,   //排除不需要查找的文件夹</span><br><span class="line">        use:[&apos;babel-loader&apos;]   // 使用的模块</span><br><span class="line">      &#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  打包以后，你会发现，conmon.js和index.js合并到了dist下的index下。</p>
+<p>  ​<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. style-loader  :  通过注入一个&lt;style&gt;标签将css添加到DOM中。</span><br><span class="line"></span><br><span class="line">   一般是配合css-loader来使用的</span><br><span class="line"></span><br><span class="line">   ​</span><br><span class="line"></span><br><span class="line">2. css-loader  :  css-loader会像import/require（）一样解释@import和url（）并解析他们</span><br><span class="line"></span><br><span class="line">      下载到项目： </span><br><span class="line"></span><br><span class="line">      num  install  style-loader  css-loader  --save-dev</span><br><span class="line"></span><br><span class="line">      在css文件夹下新建css文件index.css:</span><br><span class="line"></span><br><span class="line">   ```css</span><br><span class="line">      .a &#123;</span><br><span class="line">        width: 200px;</span><br><span class="line">        height: 200px;</span><br><span class="line">        background-color: #00ffff;</span><br><span class="line">        color: #ffffff;</span><br><span class="line">        font-size: 36px;</span><br><span class="line">        text-align: center;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
+<pre><code>在index.js引入：
+</code></pre>   <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入js文件</span></span><br><span class="line"><span class="keyword">const</span> conmon = <span class="built_in">require</span>(<span class="string">"./js/conmon.js"</span>);</span><br><span class="line"><span class="comment">// 引入css文件</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">"./css/index.css"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"1234"</span>);</span><br><span class="line">conmon.showName(<span class="string">"完成了关联"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  webpack.config.js配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`</span></span><br></pre></td></tr></table></figure>
+<p>  //  引入模块<br>  var path = require(‘path’);<br>  const webpack = require(“webpack”);</p>
+<p>  module.exports = {<br>    // 页面入口文件，（html页面引入的唯一js文件）<br>    entry: “./src/index.js”,<br>    // 对应输出项的配置<br>    output: {<br>      // 入口文件要输出的最终位置  (要放绝对路径)<br>      path: path.normalize(__dirname+”/dist”),<br>      // 输出文件的名称<br>      filename: “index.js”,<br>      // 公共资源路径<br>      publicPath: “”<br>    },<br>    module: {<br>      rules: [<br>        {<br>          test: /.js$/,   // 要查找的以.js结尾的文件<br>          exclude: /(node_modules|bower_components)/,   //排除不需要查找的文件夹<br>          use:[‘babel-loader’]   // 使用的模块<br>        },<br>         // 将引入的css样式写入到标签的style属性中<br>         {<br>           test: /.css$/,<br>           use: [‘style-loader’,’css-loader’]<br>        },</p>
+<pre><code>  ]
+},
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  }<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">在index.html使用下样式，则会看到标签样式加上去了。</span><br><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><p>extract-text-webpack-plugin 插件：4）在打包过程中，把一类文本单独抽离出来</p>
+<p>（在上面的打包css的时候，css是直接写入到标签的style属性里面，这明显是有点菜的做法，那么我们可以通过这个插件把require的css文件单独抽出来，外部引入）</p>
+<p>安装： npm install extract-text-webpack-plugin@next –save-dev</p>
+<p>这里 extract-text-webpack-plugin 必须安装最新版本。</p>
+<p>Webpack 4.0 必须对应是 extract-text-webpack-plugin 4.0.0</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//  引入模块</span><br><span class="line">var path = require(&apos;path&apos;);</span><br><span class="line">const webpack = require(&quot;webpack&quot;);</span><br><span class="line">const ExtractTextPlugin = require(&quot;extract-text-webpack-plugin&quot;);    //  用于提取出 莫一类文件，单独生成文件，比如说单独抽离css</span><br><span class="line">const ExtractCSS = new ExtractTextPlugin(&quot;css/style_1.css&quot;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  // 页面入口文件，（html页面引入的唯一js文件）</span><br><span class="line">  entry: &quot;./src/index.js&quot;,</span><br><span class="line">  // 对应输出项的配置</span><br><span class="line">  output: &#123;</span><br><span class="line">    // 入口文件要输出的最终位置  (要放绝对路径)</span><br><span class="line">    path: path.normalize(__dirname+&quot;/dist&quot;),</span><br><span class="line">    // 输出文件的名称</span><br><span class="line">    filename: &quot;index.js&quot;,</span><br><span class="line">    // 公共资源路径</span><br><span class="line">    publicPath: &quot;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.js$/,   // 要查找的以.js结尾的文件</span><br><span class="line">        exclude: /(node_modules|bower_components)/,   //排除不需要查找的文件夹</span><br><span class="line">        use:[&apos;babel-loader&apos;]   // 使用的模块</span><br><span class="line">      &#125;,</span><br><span class="line">       // 将引入的css样式写入到标签的style属性中</span><br><span class="line">      // &#123;</span><br><span class="line">      //   test: /.css$/,</span><br><span class="line">      //   use: [&apos;style-loader&apos;,&apos;css-loader&apos;]</span><br><span class="line">      // &#125;,</span><br><span class="line">      // 用插件是的css单独抽离，外部引入</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.css$/,</span><br><span class="line">        use: ExtractCSS.extract(&#123;</span><br><span class="line">          fallback: &quot;style-loader&quot;,   // 加载程序; css被提取时,加载的插件</span><br><span class="line">          use: [      // 装入器； css提取出来以后，加载为css</span><br><span class="line">            &#123;</span><br><span class="line">              loader: &quot;css-loader&quot;,</span><br><span class="line">               options: &#123;</span><br><span class="line">                 minimize : true    //  是否压缩</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          ]           </span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  //  插件</span><br><span class="line">  plugins: [</span><br><span class="line">    ExtractCSS,  // 输出css</span><br><span class="line">  ], </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  这样会生成一个css文件；但是，生成的文件不会动态自己添加到html代码中去，如果想要动态添加到代码，则需要下面的这个插件；</p>
+<p>  ​<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. html-webpack-plugin : 插件简化了HTML文件的创建，以服务于您的bundle</span><br><span class="line"></span><br><span class="line">   安装：   npm i html-webpack-plugin --save-dev</span><br></pre></td></tr></table></figure></p>
+<p>   const HtmlPlugin = require(“html-webpack-plugin”);   //  用于动态生成html,可以动态添加js和css的外部引入<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```js</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//  引入模块</span><br><span class="line">var path = require(&apos;path&apos;);</span><br><span class="line">const webpack = require(&quot;webpack&quot;);</span><br><span class="line">const ExtractTextPlugin = require(&quot;extract-text-webpack-plugin&quot;);    //  用于提取出 莫一类文件，单独生成文件，比如说单独抽离css</span><br><span class="line">const ExtractCSS = new ExtractTextPlugin(&quot;css/style_1.css&quot;); </span><br><span class="line"></span><br><span class="line">const HtmlPlugin = require(&quot;html-webpack-plugin&quot;);   //  用于动态生成html,可以动态添加js和css的外部引入</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  // 页面入口文件，（html页面引入的唯一js文件）</span><br><span class="line">  entry: &quot;./src/index.js&quot;,</span><br><span class="line">  // 对应输出项的配置</span><br><span class="line">  output: &#123;</span><br><span class="line">    // 入口文件要输出的最终位置  (要放绝对路径)</span><br><span class="line">    path: path.normalize(__dirname+&quot;/dist&quot;),</span><br><span class="line">    // 输出文件的名称</span><br><span class="line">    filename: &quot;index.js&quot;,</span><br><span class="line">    // 公共资源路径</span><br><span class="line">    publicPath: &quot;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.js$/,   // 要查找的以.js结尾的文件</span><br><span class="line">        exclude: /(node_modules|bower_components)/,   //排除不需要查找的文件夹</span><br><span class="line">        use:[&apos;babel-loader&apos;]   // 使用的模块</span><br><span class="line">      &#125;,</span><br><span class="line">       // 将引入的css样式写入到标签的style属性中</span><br><span class="line">      // &#123;</span><br><span class="line">      //   test: /.css$/,</span><br><span class="line">      //   use: [&apos;style-loader&apos;,&apos;css-loader&apos;]</span><br><span class="line">      // &#125;,</span><br><span class="line">      // 用插件是的css单独抽离，外部引入</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.css$/,</span><br><span class="line">        use: ExtractCSS.extract(&#123;</span><br><span class="line">          fallback: &quot;style-loader&quot;,   // 加载程序; css被提取时,加载的插件</span><br><span class="line">          use: [      // 装入器； css提取出来以后，加载为css</span><br><span class="line">            &#123;</span><br><span class="line">              loader: &quot;css-loader&quot;,</span><br><span class="line">               options: &#123;</span><br><span class="line">                 minimize : true    //  是否压缩</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          ]           </span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  //  插件</span><br><span class="line">  plugins: [</span><br><span class="line">    ExtractCSS,  // 输出css</span><br><span class="line">    new HtmlPlugin(&#123;        //  输出html</span><br><span class="line">      template: &quot;src/index.html&quot;  // 以src下的index.html为模板打包</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  上面的配置，不需要自己在html中引入css和js,他会自动在打包的时候，给html添加js和css并且编译到dist里面。</p>
+<p>  ​<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. less-loader : 	less文件编译 </span><br><span class="line"></span><br><span class="line">   npm install less-loader --save-dev</span><br><span class="line"></span><br><span class="line">   ​</span><br><span class="line"></span><br><span class="line">   ```js</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//  引入模块</span><br><span class="line">var path = require(&apos;path&apos;);</span><br><span class="line">const webpack = require(&quot;webpack&quot;);</span><br><span class="line">const ExtractTextPlugin = require(&quot;extract-text-webpack-plugin&quot;);    //  用于提取出 莫一类文件，单独生成文件，比如说单独抽离css</span><br><span class="line">const ExtractCSS = new ExtractTextPlugin(&quot;css/style_1.css&quot;); </span><br><span class="line">const ExtractLESS = new ExtractTextPlugin(&quot;css/style_2.css&quot;); </span><br><span class="line"></span><br><span class="line">const HtmlPlugin = require(&quot;html-webpack-plugin&quot;);   //  用于动态生成html,可以动态添加js和css的外部引入</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  // 页面入口文件，（html页面引入的唯一js文件）</span><br><span class="line">  entry: &quot;./src/index.js&quot;,</span><br><span class="line">  // 对应输出项的配置</span><br><span class="line">  output: &#123;</span><br><span class="line">    // 入口文件要输出的最终位置  (要放绝对路径)</span><br><span class="line">    path: path.normalize(__dirname+&quot;/dist&quot;),</span><br><span class="line">    // 输出文件的名称</span><br><span class="line">    filename: &quot;index.js&quot;,</span><br><span class="line">    // 公共资源路径</span><br><span class="line">    publicPath: &quot;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.js$/,   // 要查找的以.js结尾的文件</span><br><span class="line">        exclude: /(node_modules|bower_components)/,   //排除不需要查找的文件夹</span><br><span class="line">        use:[&apos;babel-loader&apos;]   // 使用的模块</span><br><span class="line">      &#125;,</span><br><span class="line">       // 将引入的css样式写入到标签的style属性中</span><br><span class="line">      // &#123;</span><br><span class="line">      //   test: /.css$/,</span><br><span class="line">      //   use: [&apos;style-loader&apos;,&apos;css-loader&apos;]</span><br><span class="line">      // &#125;,</span><br><span class="line">      // 用插件是的css单独抽离，外部引入</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.css$/,</span><br><span class="line">        use: ExtractCSS.extract(&#123;</span><br><span class="line">          fallback: &quot;style-loader&quot;,   // 加载程序; css被提取时,加载的插件</span><br><span class="line">          use: [      // 装入器； css提取出来以后，加载为css</span><br><span class="line">            &#123;</span><br><span class="line">              loader: &quot;css-loader&quot;,</span><br><span class="line">               options: &#123;</span><br><span class="line">                 minimize : true    //  是否压缩</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          ]           </span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;,</span><br><span class="line">      // 使用less文件编译成css</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.less$/,</span><br><span class="line">        use: ExtractLESS.extract(&#123;</span><br><span class="line">          fallback: &quot;style-loader&quot;,</span><br><span class="line">          use: [</span><br><span class="line">            &#123;loader: &quot;css-loader&quot;,options:&#123;minimize: true&#125;&#125;,</span><br><span class="line">            &#123;loader:&quot;less-loader&quot;&#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  //  插件</span><br><span class="line">  plugins: [</span><br><span class="line">    ExtractCSS,  // 输出css</span><br><span class="line">    ExtractLESS,  //  输出less转化为css</span><br><span class="line">    new HtmlPlugin(&#123;        //  输出html</span><br><span class="line">      template: &quot;src/index.html&quot;  // 以src下的index.html为模板打包</span><br><span class="line">    &#125;)</span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  配置好后，只要在index.js里面引入less文件即可</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 引入js文件</span><br><span class="line">const conmon = require(&quot;./js/conmon.js&quot;);</span><br><span class="line">// 引入css文件</span><br><span class="line">require(&quot;./css/index.css&quot;);</span><br><span class="line">// 引入less文件</span><br><span class="line">require(&quot;./css/style.less&quot;);</span><br><span class="line"></span><br><span class="line">console.log(&quot;1234&quot;);</span><br><span class="line">conmon.showName(&quot;完成了关联&quot;);</span><br></pre></td></tr></table></figure>
+<p>  然后运行打包，就会发现less文件就被编译成了style_2.css;</p>
+<p>  ​<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. webpack-dev-server ：使用带有动态重新加载的开发服务器的webpack。这应该只用于开发。</span><br><span class="line"></span><br><span class="line">   安装： npm i webpack-dev-server --save-dev</span><br><span class="line"></span><br><span class="line">   插件的介绍里面没有标明什么用法，所以去看了下webpack的文档，里面有个属性 devServer即是在安装 webpack-dev-server插件以后配置的。</span><br><span class="line"></span><br><span class="line">   配置如下：</span><br><span class="line"></span><br><span class="line">   ​</span><br></pre></td></tr></table></figure></p>
+<p>  //  引入模块<br>  var path = require(‘path’);<br>  const webpack = require(“webpack”);<br>  const ExtractTextPlugin = require(“extract-text-webpack-plugin”);    //  用于提取出 莫一类文件，单独生成文件，比如说单独抽离css<br>  const ExtractCSS = new ExtractTextPlugin(“css/style_1.css”);<br>  const ExtractLESS = new ExtractTextPlugin(“css/style_2.css”); </p>
+<p>  const HtmlPlugin = require(“html-webpack-plugin”);   //  用于动态生成html,可以动态添加js和css的外部引入<br>  module.exports = {<br>    // 页面入口文件，（html页面引入的唯一js文件）<br>    entry: “./src/index.js”,<br>    // 对应输出项的配置<br>    output: {<br>      // 入口文件要输出的最终位置  (要放绝对路径)<br>      path: path.normalize(<strong>dirname+”/dist”),<br>      // 输出文件的名称<br>      filename: “index.js”,<br>      // 公共资源路径<br>      publicPath: “”<br>    },<br>    module: {<br>      rules: [<br>        {<br>          test: /.js$/,   // 要查找的以.js结尾的文件<br>          exclude: /(node_modules|bower_components)/,   //排除不需要查找的文件夹<br>          use:[‘babel-loader’]   // 使用的模块<br>        },<br>         // 将引入的css样式写入到标签的style属性中<br>        // {<br>        //   test: /.css$/,<br>        //   use: [‘style-loader’,’css-loader’]<br>        // },<br>        // 用插件是的css单独抽离，外部引入<br>        {<br>          test: /.css$/,<br>          use: ExtractCSS.extract({<br>            fallback: “style-loader”,   // 加载程序; css被提取时,加载的插件<br>            use: [      // 装入器； css提取出来以后，加载为css<br>              {<br>                loader: “css-loader”,<br>                 options: {<br>                   minimize : true    //  是否压缩<br>                  }<br>              }<br>            ]<br>          })<br>        },<br>        // 使用less文件编译成css<br>        {<br>          test: /.less$/,<br>          use: ExtractLESS.extract({<br>            fallback: “style-loader”,<br>            use: [<br>              {loader: “css-loader”,options:{minimize: true}},<br>              {loader:”less-loader”}<br>            ]<br>          })<br>        }<br>      ]<br>    },<br>    //  插件<br>    plugins: [<br>      ExtractCSS,  // 输出css<br>      ExtractLESS,  //  输出less转化为css<br>      new HtmlPlugin({        //  输出html<br>        template: “src/index.html”  // 以src下的index.html为模板打包<br>      })<br>    ],<br>    //  开启服务<br>    devServer : {<br>      contentBase: path.join(</strong>dirname+”/dist”),  // 告诉服务器从哪里提供内容<br>      open: true,     //  服务器是否自动打开浏览器<br>      openPage: ‘index.html’,   //打开浏览器是指定打开的文件<br>      port: 8080,     //  设置端口号<br>      proxy: {        //  设置代理服务器<br>        “/api”: {<br>          target: “<a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a>“,   //  当在页面中输入 /api的时候，相当于 <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a><br>          pathRewrite: {   // 改写路径<br>            “^/api”: “”<br>          }<br>        }<br>      },<br>    }<br>  }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> Package.json配置：</span><br><span class="line"></span><br><span class="line"> 看script属性下的dev属性：webpack-dev-server</span><br><span class="line"></span><br><span class="line">```json</span><br><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;y&quot;,</span><br><span class="line">    &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">    &quot;description&quot;: &quot;&quot;,</span><br><span class="line">    &quot;main&quot;: &quot;webpack.config.js&quot;,</span><br><span class="line">    &quot;scripts&quot;: &#123;</span><br><span class="line">      &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</span><br><span class="line">      &quot;dev&quot;: &quot;webpack-dev-server&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;author&quot;: &quot;&quot;,</span><br><span class="line">    &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">    &quot;devDependencies&quot;: &#123;</span><br><span class="line">      &quot;babel-loader&quot;: &quot;^7.1.4&quot;,</span><br><span class="line">      &quot;css-loader&quot;: &quot;^0.28.10&quot;,</span><br><span class="line">      &quot;extract-text-webpack-plugin&quot;: &quot;^4.0.0-beta.0&quot;,</span><br><span class="line">      &quot;html-webpack-plugin&quot;: &quot;^3.0.6&quot;,</span><br><span class="line">      &quot;less&quot;: &quot;^3.0.1&quot;,</span><br><span class="line">      &quot;less-loader&quot;: &quot;^4.1.0&quot;,</span><br><span class="line">      &quot;style-loader&quot;: &quot;^0.20.3&quot;,</span><br><span class="line">      &quot;vue&quot;: &quot;^2.5.13&quot;,</span><br><span class="line">      &quot;webpack-dev-server&quot;: &quot;^3.1.1&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;dependencies&quot;: &#123;</span><br><span class="line">      &quot;webpack&quot;: &quot;^4.1.1&quot;,</span><br><span class="line">      &quot;webpack-cli&quot;: &quot;^2.0.11&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>   ​ 然后配置好后，运行： npm run dev</p>
+<p>  则会自动开启服务器，当我们每次修改代码保存以后，会自动打包文件，并在我们的浏览器实时更新。</p>
+<p>  <strong>这样我们就把一个简单的开发环境搭建好了</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/10/从零开始用webpack搭建一个开发环境/" data-id="cjftb8cxb0001e8wc1gz7d0lu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-用canvas做一个制作导入图片生成海报图片的小工具" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/wangzai.github.io/2018/04/08/用canvas做一个制作导入图片生成海报图片的小工具/" class="article-date">
@@ -98,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/08/用canvas做一个制作导入图片生成海报图片的小工具/" data-id="cjfq5dmhf00040kwcu7x5ploe" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/08/用canvas做一个制作导入图片生成海报图片的小工具/" data-id="cjftb8cxg0005e8wcrx4ssyqh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -144,7 +348,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/" data-id="cjfq5dmhd00020kwcix7ikxo5" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/" data-id="cjftb8cxe0003e8wc3sxmzuvr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -190,7 +394,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/小程序用web-view到入外部h5/" data-id="cjfq5dmha00010kwcqi8r474m" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/小程序用web-view到入外部h5/" data-id="cjftb8cxh0006e8wcien9ma1r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -246,7 +450,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/03/14/微信小程序写一个输入八位编号的输入框/" data-id="cjfq5dmhe00030kwcbknwwihv" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/03/14/微信小程序写一个输入八位编号的输入框/" data-id="cjftb8cy4000ae8wcv1br32he" class="article-share-link">Share</a>
       
       
     </footer>
@@ -314,7 +518,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/" data-id="cjfq5dmhj00080kwcft14s7o6" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/" data-id="cjftb8cy30009e8wc5ckqbgjm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -526,7 +730,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/" data-id="cjfq5dmhg00050kwchwweaqsw" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/" data-id="cjftb8cxi0007e8wczn9rao5z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -578,7 +782,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" data-id="cjfq5dmhh00060kwcmii53vz4" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" data-id="cjftb8cy20008e8wcpcpkqe9r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -645,52 +849,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" data-id="cjfq5dmhi00070kwc3h5ten1c" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/wangzai.github.io/2018/01/29/hello-world/" class="article-date">
-  <time datetime="2018-01-29T06:33:27.193Z" itemprop="datePublished">2018-01-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/wangzai.github.io/2018/01/29/hello-world/">hexo如何新建文章</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hello-world/" data-id="cjfq5dmh600000kwcn0hl59dq" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" data-id="cjftb8cxf0004e8wcactxhp4i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -701,6 +860,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/wangzai.github.io/page/2/">2</a><a class="extend next" rel="next" href="/wangzai.github.io/page/2/">下一页 &raquo;</a>
+  </nav>
 
 </section>
         
@@ -731,6 +895,14 @@
       <ul>
         
           <li>
+            <a href="/wangzai.github.io/2018/04/10/字体按需压缩到最小/">字体按需压缩到最小</a>
+          </li>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/04/10/从零开始用webpack搭建一个开发环境/">从零开始用webpack搭建一个开发环境</a>
+          </li>
+        
+          <li>
             <a href="/wangzai.github.io/2018/04/08/用canvas做一个制作导入图片生成海报图片的小工具/">用canvas做一个制作导入图片生成海报图片的小工具</a>
           </li>
         
@@ -740,14 +912,6 @@
         
           <li>
             <a href="/wangzai.github.io/2018/04/03/小程序用web-view到入外部h5/">小程序用web-view到入外部h5</a>
-          </li>
-        
-          <li>
-            <a href="/wangzai.github.io/2018/03/14/微信小程序写一个输入八位编号的输入框/">微信小程序写一个输入八位编号的输入框</a>
-          </li>
-        
-          <li>
-            <a href="/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/">nodeJs开启本地服务器，即事件buffer和Stream的使用</a>
           </li>
         
       </ul>
