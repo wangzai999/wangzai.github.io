@@ -65,6 +65,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-小程序中tabBar页点击本页事件安卓和ios不一致的解决方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/wangzai.github.io/2018/04/27/小程序中tabBar页点击本页事件安卓和ios不一致的解决方法/" class="article-date">
+  <time datetime="2018-04-27T10:34:46.000Z" itemprop="datePublished">2018-04-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/wangzai.github.io/2018/04/27/小程序中tabBar页点击本页事件安卓和ios不一致的解决方法/">小程序中tabBar页点击本页事件安卓和ios不一致的解决方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="小程序onTabItemTap在安卓下和ios不一致的解决方法"><a href="#小程序onTabItemTap在安卓下和ios不一致的解决方法" class="headerlink" title="小程序onTabItemTap在安卓下和ios不一致的解决方法"></a>小程序onTabItemTap在安卓下和ios不一致的解决方法</h3><p><strong>小程序项目，根据客户需求，需要在首页的时候，用户再次点击首页按钮，页面回到顶部，但是在其他页面的时候，切换回首页，应该显示用户上次流览的地方。我的导航栏是用tabBar配置的；首先想到的是小程序的onTabltemTap事件（小程序的解释：当前是 tab 页时，点击 tab 时触发）；代码如下所示：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">    当在本页的时候点击本页按钮</span><br><span class="line">*/</span><br><span class="line">  onTabItemTap: function (item) &#123;</span><br><span class="line">  	</span><br><span class="line">      wx.pageScrollTo(&#123;</span><br><span class="line">        scrollTop: 0,</span><br><span class="line">        duration: 300 </span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<p>这样写在开发者工具中测试是没问题的，可以达到我们要的效果，然后是iPhone手机测试也是没有问题的。但是，在安卓手机下，从其他页面切换回首页的时候，页面也会回到顶部，这样显然是不合理的。</p>
+<p>又搜了小程序的其他方法，目测就这个能实现。现在的问题就是安卓手机上的问题，于是就对安卓手机进行兼容就好了。下面是解决方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"> data: &#123;</span><br><span class="line">   system: &quot;&quot;,</span><br><span class="line">   isIndex: 1  //  判断是否是在index页,1为在，0为不在</span><br><span class="line"> &#125;,</span><br><span class="line"> /*</span><br><span class="line">   页面关闭</span><br><span class="line"> */</span><br><span class="line"> onHide: function () &#123;</span><br><span class="line">   this.data.isIndex = 0;</span><br><span class="line"> &#125;, </span><br><span class="line">/*</span><br><span class="line">   当在本页的时候点击本页按钮</span><br><span class="line"> */</span><br><span class="line"> onTabItemTap: function (item) &#123;</span><br><span class="line">   console.log(item);</span><br><span class="line">   console.log(this.data.system)</span><br><span class="line">   if (this.data.system.indexOf(&quot;ios&quot;) &gt; -1)&#123;</span><br><span class="line">     wx.pageScrollTo(&#123;</span><br><span class="line">       scrollTop: 0,</span><br><span class="line">       duration: 300</span><br><span class="line">     &#125;)</span><br><span class="line">   &#125; else &#123;</span><br><span class="line">     if(this.data.isIndex == 1) &#123;</span><br><span class="line">       wx.pageScrollTo(&#123;</span><br><span class="line">         scrollTop: 0,</span><br><span class="line">         duration: 300</span><br><span class="line">       &#125;)</span><br><span class="line">     &#125;else &#123;</span><br><span class="line">       this.data.isIndex = 1;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125; </span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+<p><strong>实现逻辑就是首先判断是否是安卓机，如果是安卓则进行下面的判断，用一个变量判断是否是在本页面点击的，如果是在本页点击，则执行页面回顶部；如果是在其他页面切换过来的，则不执行，但是让判断是否本页的变量变为一，表示是在本页了；当页面切换出去的时候，让变量变为0，表示不在本页了。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/27/小程序中tabBar页点击本页事件安卓和ios不一致的解决方法/" data-id="cjghtn0c20002qwwcskovb76s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-字体按需压缩到最小" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/wangzai.github.io/2018/04/10/字体按需压缩到最小/" class="article-date">
@@ -106,7 +148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/10/字体按需压缩到最小/" data-id="cjftb8cx70000e8wc5tdy13s3" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/10/字体按需压缩到最小/" data-id="cjghtn0c10001qwwcui42yppj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/10/从零开始用webpack搭建一个开发环境/" data-id="cjftb8cxb0001e8wc1gz7d0lu" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/10/从零开始用webpack搭建一个开发环境/" data-id="cjghtn0ce000bqwwckiod8u6k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -302,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/08/用canvas做一个制作导入图片生成海报图片的小工具/" data-id="cjftb8cxg0005e8wcrx4ssyqh" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/08/用canvas做一个制作导入图片生成海报图片的小工具/" data-id="cjghtn0cb0008qwwc4jg8g02p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -348,7 +390,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/" data-id="cjftb8cxe0003e8wc3sxmzuvr" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/" data-id="cjghtn0c40003qwwcsqx385ra" class="article-share-link">Share</a>
       
       
     </footer>
@@ -394,7 +436,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/小程序用web-view到入外部h5/" data-id="cjftb8cxh0006e8wcien9ma1r" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/03/小程序用web-view到入外部h5/" data-id="cjghtn0c70005qwwcg807sgup" class="article-share-link">Share</a>
       
       
     </footer>
@@ -450,7 +492,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/03/14/微信小程序写一个输入八位编号的输入框/" data-id="cjftb8cy4000ae8wcv1br32he" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/03/14/微信小程序写一个输入八位编号的输入框/" data-id="cjghtn0cd000aqwwc34ac9xgt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -518,7 +560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/" data-id="cjftb8cy30009e8wc5ckqbgjm" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/nodeJs开启本地服务器，即事件buffer和Stream的使用/" data-id="cjghtn0ca0007qwwcdbk2p9ha" class="article-share-link">Share</a>
       
       
     </footer>
@@ -730,7 +772,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/" data-id="cjftb8cxi0007e8wczn9rao5z" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/02/记用pychon写一个爬图片的网页爬虫/" data-id="cjghtn0cc0009qwwcem6o1r2c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -782,74 +824,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" data-id="cjftb8cy20008e8wcpcpkqe9r" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hexo-git在github上搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" class="article-date">
-  <time datetime="2018-01-29T08:17:38.000Z" itemprop="datePublished">2018-01-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/">hexo+git在github上搭建个人博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><p><a href="https://git-scm.com/" target="_blank" rel="noopener">git地址</a></p>
-<p> <img src="http://s14.sinaimg.cn/orignal/006hC326zy7hKZ7HW4R8d" alt="TIM截图20180129170345"></p>
-<p><a href="https://www.cnblogs.com/ximiaomiao/p/7140456.html" target="_blank" rel="noopener">详细安装教程</a></p>
-<h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>安装hexo这里就只说说npm安装。而要用npm，先安装nodejs；nodejs安装完成自带有npm包管理；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo -g</span><br></pre></td></tr></table></figure>
-<p>检查时候安装：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
-<p>新建一个文件夹用来存放项目，在这个文件夹打开命令行，执行下面命令新建一个hexo项目</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-<p>好了以后，在把要用的插件安装了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i</span><br></pre></td></tr></table></figure>
-<p>完成，打包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-<p>运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<p>直接复制监听的地址，既可以看到效果</p>
-<h3 id="hexo文件的配置"><a href="#hexo文件的配置" class="headerlink" title="hexo文件的配置"></a>hexo文件的配置</h3><p>找到_config.yml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#网站</span><br><span class="line">title: XX的博客                  #网站标题</span><br><span class="line">subtitle:                       #网站副标题</span><br><span class="line">description: xx的技术博客        #网站描述</span><br><span class="line">author: xx                      #你的名字</span><br><span class="line">language: zh-CN                 #网站使用的语言</span><br><span class="line">timezone:                       #网站时区</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#网址</span><br><span class="line">url: https://wangzai999.github.io/wangzai.github.io/      #网址</span><br><span class="line">root: /wangzai.github.io/                                 #网站根目录</span><br><span class="line">permalink: :year/:month/:day/:title/                      #文章的永久链接格式</span><br><span class="line">permalink_defaults:										  #永久链接中各部分的默认值</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#目录</span><br><span class="line">source_dir: source                    #资源文件夹</span><br><span class="line">public_dir: public                    #公共文件夹</span><br><span class="line">tag_dir: tags                         #标签文件夹</span><br><span class="line">archive_dir: archives                 #归档文件夹</span><br><span class="line">category_dir: categories              #分类文件夹</span><br><span class="line">code_dir: downloads/code              #Include code文件夹</span><br><span class="line">i18n_dir: :lang                       #国际化文件夹</span><br><span class="line">skip_render:                          #跳过文件的渲染</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#文章</span><br><span class="line">new_post_name: :title.md              #新文章的文件名称</span><br><span class="line">default_layout: post                  #预设布局</span><br><span class="line">titlecase: false                      #把标题转换为title case</span><br><span class="line">external_link: true                   #在新标签中打开链接</span><br><span class="line">filename_case: 0                      #把文件名转换为小写或大写</span><br><span class="line">render_drafts: false                  #是否显示草稿</span><br><span class="line">post_asset_folder: false              #启动Asset文件夹</span><br><span class="line">relative_link: false                  #把链接改为与根目录的相对位置</span><br><span class="line">future: true                          #显示未来的文章</span><br><span class="line">highlight:                            #代码块的设置</span><br><span class="line">  enable: true</span><br><span class="line">  line_number: true</span><br><span class="line">  auto_detect: false</span><br><span class="line">  tab_replace:</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">date_format: YYYY-MM-DD         #日期格式</span><br><span class="line">time_format: HH:mm:ss           #时间格式</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">per_page: 10                    #每页显示的文章量</span><br><span class="line">pagination_dir: page            #分页目录</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">theme: landscape      #更改主题</span><br></pre></td></tr></table></figure>
-<h3 id="上传github"><a href="#上传github" class="headerlink" title="上传github"></a>上传github</h3><p>在项目文件夹安装 <a href="https://github.com/hexojs/hexo-deployer-heroku" target="_blank" rel="noopener">hexo-deployer-heroku</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-deployer-heroku --save</span><br></pre></td></tr></table></figure>
-<p>修改配置文件_config.yml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/wangzai999/wangzai.github.io.git  	#库的地址</span><br><span class="line">  branch: master                                                #分支名称</span><br><span class="line">  message:                                                      #自定义提交信息</span><br></pre></td></tr></table></figure>
-<p>这里库地址即是在github上创建的项目地址</p>
-<p>上传代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-<p>相关链接：</p>
-<p><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">hexo文档</a>         <a href="https://www.cnblogs.com/fengxiongZz/p/7707219.html" target="_blank" rel="noopener">写的好的安装教程</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/01/29/hexo-git在github上搭建个人博客/" data-id="cjftb8cxf0004e8wcactxhp4i" class="article-share-link">Share</a>
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/02/01/来一波本地项目上传到github/" data-id="cjghtn0c90006qwwcuhw6zlww" class="article-share-link">Share</a>
       
       
     </footer>
@@ -895,6 +870,10 @@
       <ul>
         
           <li>
+            <a href="/wangzai.github.io/2018/04/27/小程序中tabBar页点击本页事件安卓和ios不一致的解决方法/">小程序中tabBar页点击本页事件安卓和ios不一致的解决方法</a>
+          </li>
+        
+          <li>
             <a href="/wangzai.github.io/2018/04/10/字体按需压缩到最小/">字体按需压缩到最小</a>
           </li>
         
@@ -908,10 +887,6 @@
         
           <li>
             <a href="/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/">做一个新手指引的遮罩层效果，实现动态遮罩想要的标签</a>
-          </li>
-        
-          <li>
-            <a href="/wangzai.github.io/2018/04/03/小程序用web-view到入外部h5/">小程序用web-view到入外部h5</a>
           </li>
         
       </ul>

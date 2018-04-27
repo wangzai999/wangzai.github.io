@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>小程序中tabBar页点击本页事件安卓和ios不一致的解决方法 | 旺平的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="小程序onTabItemTap在安卓下和ios不一致的解决方法小程序项目，根据客户需求，需要在首页的时候，用户再次点击首页按钮，页面回到顶部，但是在其他页面的时候，切换回首页，应该显示用户上次流览的地方。我的导航栏是用tabBar配置的；首先想到的是小程序的onTabltemTap事件（小程序的解释：当前是 tab 页时，点击 tab 时触发）；代码如下所示： 123456789/*    当在本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小程序中tabBar页点击本页事件安卓和ios不一致的解决方法">
+<meta property="og:url" content="https://wangzai999.github.io/wangzai.github.io/2018/04/27/小程序中tabBar页点击本页事件安卓和ios不一致的解决方法/index.html">
+<meta property="og:site_name" content="旺平的博客">
+<meta property="og:description" content="小程序onTabItemTap在安卓下和ios不一致的解决方法小程序项目，根据客户需求，需要在首页的时候，用户再次点击首页按钮，页面回到顶部，但是在其他页面的时候，切换回首页，应该显示用户上次流览的地方。我的导航栏是用tabBar配置的；首先想到的是小程序的onTabltemTap事件（小程序的解释：当前是 tab 页时，点击 tab 时触发）；代码如下所示： 123456789/*    当在本">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-27T10:35:31.898Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小程序中tabBar页点击本页事件安卓和ios不一致的解决方法">
+<meta name="twitter:description" content="小程序onTabItemTap在安卓下和ios不一致的解决方法小程序项目，根据客户需求，需要在首页的时候，用户再次点击首页按钮，页面回到顶部，但是在其他页面的时候，切换回首页，应该显示用户上次流览的地方。我的导航栏是用tabBar配置的；首先想到的是小程序的onTabltemTap事件（小程序的解释：当前是 tab 页时，点击 tab 时触发）；代码如下所示： 123456789/*    当在本">
+  
+    <link rel="alternate" href="/wangzai.github.io/atom.xml" title="旺平的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/wangzai.github.io/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/wangzai.github.io/" id="logo">旺平的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/wangzai.github.io/">主页</a>
+        
+          <a class="main-nav-link" href="/wangzai.github.io/archives">列表</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/wangzai.github.io/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wangzai999.github.io/wangzai.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-小程序中tabBar页点击本页事件安卓和ios不一致的解决方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/wangzai.github.io/2018/04/27/小程序中tabBar页点击本页事件安卓和ios不一致的解决方法/" class="article-date">
+  <time datetime="2018-04-27T10:34:46.000Z" itemprop="datePublished">2018-04-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      小程序中tabBar页点击本页事件安卓和ios不一致的解决方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="小程序onTabItemTap在安卓下和ios不一致的解决方法"><a href="#小程序onTabItemTap在安卓下和ios不一致的解决方法" class="headerlink" title="小程序onTabItemTap在安卓下和ios不一致的解决方法"></a>小程序onTabItemTap在安卓下和ios不一致的解决方法</h3><p><strong>小程序项目，根据客户需求，需要在首页的时候，用户再次点击首页按钮，页面回到顶部，但是在其他页面的时候，切换回首页，应该显示用户上次流览的地方。我的导航栏是用tabBar配置的；首先想到的是小程序的onTabltemTap事件（小程序的解释：当前是 tab 页时，点击 tab 时触发）；代码如下所示：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">    当在本页的时候点击本页按钮</span><br><span class="line">*/</span><br><span class="line">  onTabItemTap: function (item) &#123;</span><br><span class="line">  	</span><br><span class="line">      wx.pageScrollTo(&#123;</span><br><span class="line">        scrollTop: 0,</span><br><span class="line">        duration: 300 </span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<p>这样写在开发者工具中测试是没问题的，可以达到我们要的效果，然后是iPhone手机测试也是没有问题的。但是，在安卓手机下，从其他页面切换回首页的时候，页面也会回到顶部，这样显然是不合理的。</p>
+<p>又搜了小程序的其他方法，目测就这个能实现。现在的问题就是安卓手机上的问题，于是就对安卓手机进行兼容就好了。下面是解决方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"> data: &#123;</span><br><span class="line">   system: &quot;&quot;,</span><br><span class="line">   isIndex: 1  //  判断是否是在index页,1为在，0为不在</span><br><span class="line"> &#125;,</span><br><span class="line"> /*</span><br><span class="line">   页面关闭</span><br><span class="line"> */</span><br><span class="line"> onHide: function () &#123;</span><br><span class="line">   this.data.isIndex = 0;</span><br><span class="line"> &#125;, </span><br><span class="line">/*</span><br><span class="line">   当在本页的时候点击本页按钮</span><br><span class="line"> */</span><br><span class="line"> onTabItemTap: function (item) &#123;</span><br><span class="line">   console.log(item);</span><br><span class="line">   console.log(this.data.system)</span><br><span class="line">   if (this.data.system.indexOf(&quot;ios&quot;) &gt; -1)&#123;</span><br><span class="line">     wx.pageScrollTo(&#123;</span><br><span class="line">       scrollTop: 0,</span><br><span class="line">       duration: 300</span><br><span class="line">     &#125;)</span><br><span class="line">   &#125; else &#123;</span><br><span class="line">     if(this.data.isIndex == 1) &#123;</span><br><span class="line">       wx.pageScrollTo(&#123;</span><br><span class="line">         scrollTop: 0,</span><br><span class="line">         duration: 300</span><br><span class="line">       &#125;)</span><br><span class="line">     &#125;else &#123;</span><br><span class="line">       this.data.isIndex = 1;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125; </span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+<p><strong>实现逻辑就是首先判断是否是安卓机，如果是安卓则进行下面的判断，用一个变量判断是否是在本页面点击的，如果是在本页点击，则执行页面回顶部；如果是在其他页面切换过来的，则不执行，但是让判断是否本页的变量变为一，表示是在本页了；当页面切换出去的时候，让变量变为0，表示不在本页了。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wangzai999.github.io/wangzai.github.io/2018/04/27/小程序中tabBar页点击本页事件安卓和ios不一致的解决方法/" data-id="cjghtn0c20002qwwcskovb76s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/wangzai.github.io/2018/04/10/字体按需压缩到最小/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">字体按需压缩到最小</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/wangzai.github.io/archives/2018/01/">一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/04/27/小程序中tabBar页点击本页事件安卓和ios不一致的解决方法/">小程序中tabBar页点击本页事件安卓和ios不一致的解决方法</a>
+          </li>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/04/10/字体按需压缩到最小/">字体按需压缩到最小</a>
+          </li>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/04/10/从零开始用webpack搭建一个开发环境/">从零开始用webpack搭建一个开发环境</a>
+          </li>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/04/08/用canvas做一个制作导入图片生成海报图片的小工具/">用canvas做一个制作导入图片生成海报图片的小工具</a>
+          </li>
+        
+          <li>
+            <a href="/wangzai.github.io/2018/04/03/做一个新手指引的遮罩层效果，实现动态遮罩想要的标签/">做一个新手指引的遮罩层效果，实现动态遮罩想要的标签</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 旺仔<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/wangzai.github.io/" class="mobile-nav-link">主页</a>
+  
+    <a href="/wangzai.github.io/archives" class="mobile-nav-link">列表</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/wangzai.github.io/fancybox/jquery.fancybox.css">
+  <script src="/wangzai.github.io/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/wangzai.github.io/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
